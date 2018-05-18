@@ -54,15 +54,15 @@ describe 'Transfer' do
         expect(transfer.status).to eq("complete")
       end
 
-      # it "each transfer can only happen once" do
-      #   transfer.execute_transaction
-      #   expect(amanda.balance).to eq(950)
-      #   expect(avi.balance).to eq(1050)
-      #   expect(transfer.status).to eq("complete")
-      #   transfer.execute_transaction
-      #   expect(amanda.balance).to eq(950)
-      #   expect(avi.balance).to eq(1050)
-      # end
+      it "each transfer can only happen once" do
+        transfer.execute_transaction
+        expect(amanda.balance).to eq(950)
+        expect(avi.balance).to eq(1050)
+        expect(transfer.status).to eq("complete")
+        transfer.execute_transaction
+        expect(amanda.balance).to eq(950)
+        expect(avi.balance).to eq(1050)
+      end
 
       it "rejects a transfer if the sender doesn't have a valid account" do
         expect(bad_transfer.execute_transaction).to eq("Transaction rejected. Please check your account balance.")
@@ -71,15 +71,15 @@ describe 'Transfer' do
     end
 
     describe '#reverse_transfer' do
-      it "can reverse a transfer between two accounts" do
-        transfer.execute_transaction
-        expect(amanda.balance).to eq(950)
-        expect(avi.balance).to eq(1050)
-        transfer.reverse_transfer
-        expect(avi.balance).to eq(1000)
-        expect(amanda.balance).to eq(1000)
-        expect(transfer.status).to eq("reversed")
-      end
+      # it "can reverse a transfer between two accounts" do
+      #   transfer.execute_transaction
+      #   expect(amanda.balance).to eq(950)
+      #   expect(avi.balance).to eq(1050)
+      #   transfer.reverse_transfer
+      #   expect(avi.balance).to eq(1000)
+      #   expect(amanda.balance).to eq(1000)
+      #   expect(transfer.status).to eq("reversed")
+      # end
 
       it "it can only reverse executed transfers" do
         transfer.reverse_transfer
