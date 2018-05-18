@@ -13,10 +13,7 @@ class Transfer
   def valid?
     self.sender.valid? && self.receiver.valid?
   end
-
-  def old_amount= (self.amount)
-
-  end
+  
   def execute_transaction
     counter = 0
     if self.sender.valid? && self.sender.balance >= self.amount && counter = 0
