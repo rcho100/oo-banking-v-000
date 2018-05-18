@@ -3,7 +3,7 @@ class Transfer
   attr_reader :sender, :receiver
   attr_accessor :status, :amount
 
-  @@old_amount = 0
+  @@old_amount = self.amount
   def initialize(sender, receiver, amount)
     @sender = sender
     @receiver = receiver
@@ -19,7 +19,6 @@ class Transfer
     if self.sender.valid? && self.sender.balance >= self.amount
       self.sender.balance -= self.amount
       self.receiver.balance += self.amount
-      @@old_amount = self.amount
       self.amount = 0
       self.status = "complete"
     else
