@@ -19,6 +19,7 @@ class Transfer
     if self.sender.valid? && self.sender.balance >= self.amount
       self.sender.balance -= self.amount
       self.receiver.balance += self.amount
+      @old_amount = self.amount
       self.amount = 0
       self.status = "complete"
     else
