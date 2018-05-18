@@ -15,17 +15,16 @@ class Transfer
   end
 
   def execute_transaction
-    counter = 0
-    if self.sender.valid? && self.sender.balance >= self.amount && counter == 0
-      counter += 1
+    if self.sender.valid? && self.sender.balance >= self.amount && self.status == "pending"
       self.sender.balance -= self.amount
       self.receiver.balance += self.amount
       self.status = "complete"
-    elsif counter == 0 && !self.sender.valid? && !self.sender.balance
-      counter += 1
+    else
       self.status = "rejected"
       "Transaction rejected. Please check your account balance."
     end
+
+    #without the counter I used the self.amount = 0 to pass the "each transfer can only happen once"
   end
 
   def reverse_transfer
