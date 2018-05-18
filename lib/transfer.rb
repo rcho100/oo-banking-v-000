@@ -13,7 +13,7 @@ class Transfer
   def valid?
     self.sender.valid? && self.receiver.valid?
   end
-  
+
   def execute_transaction
     counter = 0
     if self.sender.valid? && self.sender.balance >= self.amount && counter = 0
@@ -32,8 +32,8 @@ class Transfer
 
   def reverse_transfer
     binding.pry
-    self.receiver.balance -= @@old_amount
-    self.sender.balance += @@old_amount
+    self.receiver.balance -= self.amount
+    self.sender.balance += self.amount
     self.status = "reversed"
   end
 end
