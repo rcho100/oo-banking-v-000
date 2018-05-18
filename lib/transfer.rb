@@ -23,11 +23,10 @@ class Transfer
       self.status = "rejected"
       "Transaction rejected. Please check your account balance."
     end
-
-    #without the counter I used the self.amount = 0 to pass the "each transfer can only happen once"
   end
 
   def reverse_transfer
+    self.valid?
     self.receiver.balance -= self.amount
     self.sender.balance += self.amount
     self.status = "reversed"
