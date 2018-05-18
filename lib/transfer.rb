@@ -15,12 +15,10 @@ class Transfer
   end
 
   def execute_transaction
-      #binding.pry
     if self.sender.valid? && self.sender.balance >= self.amount
       self.sender.balance -= self.amount
       self.receiver.balance += self.amount
       @old_amount = self.amount
-      binding.pry
       self.amount = 0
       self.status = "complete"
     else
@@ -30,7 +28,7 @@ class Transfer
   end
 
   def reverse_transfer
-    self.receiver.balance -= self.amount
-    self.sender.balance += self.amount
+    self.receiver.balance -= @old_amount
+    self.sender.balance += @old_amount
   end
 end
